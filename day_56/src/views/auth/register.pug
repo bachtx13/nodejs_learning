@@ -1,0 +1,33 @@
+extends ../layouts/main-layout
+
+block content
+    div#login.container
+        div: form(method='post', class='form-vertical', action='/auth/register')
+            fieldset
+                legend: strong.text-info Register page
+                div.form-group.has-validation
+                    - var isInvalid = message.username && message.username.error
+                    label Username:
+                    input.form-control(name='username', value=user.username, autofocus, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        div.invalid-feedback #{message.username.error}
+                div.form-group
+                    - var isInvalid = message.password && message.password.error
+                    label Password:
+                    input.form-control(name='password', value=user.password, type='password', class={"is-invalid": isInvalid})
+                    if isInvalid
+                        div.invalid-feedback #{message.password.error}
+                div.form-group
+                    - var isInvalid = message.fullName && message.fullName.error
+                    label Full Name:
+                    input.form-control(name='fullName', value=user.fullName, type='text', class={"is-invalid": isInvalid})
+                    if isInvalid
+                        div.invalid-feedback #{message.fullName.error}
+                div.form-group
+                    - var isInvalid = message.age && message.age.error
+                    label Age:
+                    input.form-control(name='age', value=user.age, type='number', class={"is-invalid": isInvalid})
+                    if isInvalid
+                        div.invalid-feedback #{message.age.error}
+                div.form-actions
+                    input.btn.btn-primary(type='submit', value='Register')

@@ -1,0 +1,8 @@
+extends ../layouts/main-layout
+
+block content
+    div
+        p Ha's Home
+        p Chào #{user.fullName} #{user.age} tuổi
+        form(action='/auth/logout', method='POST')
+            button(type="submit") Đăng xuất

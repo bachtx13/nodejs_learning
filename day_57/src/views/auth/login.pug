@@ -1,0 +1,22 @@
+extends ../layouts/main-layout
+
+block content
+    div#login.container
+        div: form(method='post', class='form-vertical', action='/auth/login')
+            fieldset
+                legend: strong.text-info Login page
+                div.form-group.has-validation
+                    - var isInvalid = message.username && message.username.error
+                    label Username:
+                    input.form-control(name='username', value=user.username, autofocus, required=true, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        div.invalid-feedback #{message.username.error}
+                div.form-group
+                    - var isInvalid = message.password && message.password.error
+                    label Password:
+                    input.form-control(name='password', value=user.password, type='password', required=true, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        div.invalid-feedback #{message.password.error}
+                div.form-actions
+                    input.btn.btn-primary(type='submit', value='Login')
+        a(href='/auth/register') Đăng ký

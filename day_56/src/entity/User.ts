@@ -14,7 +14,11 @@ export class User {
 
     @Column({name: "full_name"})
     fullName: string
+
     @Column()
     age: number
+
+    @Column({default: 0})
+    status: number
 
 }

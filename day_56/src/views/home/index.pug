@@ -6,3 +6,24 @@ block content
         p Chào #{user.fullName} #{user.age} tuổi
         form(action='/auth/logout', method='POST')
             button(type="submit") Đăng xuất
+        if userList && userList.length > 0
+            div
+                table
+                    thead
+                        th Username
+                        th Full Name
+                        th Age
+                        th Status
+                        th Action
+                    tbody
+                        each user in userList
+                            - var userIsActive = user.status === 1
+                            tr
+                                td #{user.username}
+                                td #{user.fullName}
+                                td #{user.age}
+                                td #{userIsActive ? "Active" : "Inactive"}
+                                td
+                                    form(action='/user/change-status', method='POST')
+                                        input(hidden=true, value=user.id, name='id')
+                                        button Change Status

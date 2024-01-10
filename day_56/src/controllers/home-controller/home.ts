@@ -8,14 +8,17 @@ const homeView = async (req: Request, res: Response) => {
         const userRepository = await getUserRepository();
         const userLogin = await userRepository.findOneBy({
             id: userId
-        })
+        });
+        const userList = await userRepository.find()
+        console.log(userList)
         return res.render("home", {
             title: 'Home',
             message: {},
             user: <UserResponse>{
                 fullName: userLogin?.fullName,
                 age: userLogin?.age
-            }
+            },
+            userList: userList
         });
     } catch (err) {
         console.log(err)

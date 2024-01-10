@@ -8,9 +8,12 @@ import {LoginRequest} from "../../interfaces/login-request";
 import {addDate} from "../../utils/date-util";
 
 const loginView = (req: Request, res: Response) => {
+    const error = req.flash('login-error');
     res.render("auth/login", {
         title: 'Login',
-        message: {},
+        message: {
+            error: error,
+        },
         user: <UserRequest>{
             username: '',
             password: ''
@@ -53,7 +56,8 @@ const register = async (req: Request<RegisterRequest>, res: Response) => {
                     username,
                     password,
                     fullName,
-                    age
+                    age,
+                    status: 0
                 }
             });
         }

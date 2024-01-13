@@ -1,11 +1,11 @@
 import {Request, Response} from "express";
-import {UserRequest} from "../../interfaces/user-request";
-import {RegisterRequest} from "../../interfaces/register-request";
-import {User} from "../../entity/User";
-import {getUserRepository} from "../../repositories";
-import {comparePassword, hashPassword} from "../../utils/password-util";
-import {LoginRequest} from "../../interfaces/login-request";
-import {addDate} from "../../utils/date-util";
+import {UserRequest} from "../interfaces/user-request";
+import {RegisterRequest} from "../interfaces/register-request";
+import {User} from "../entity/User";
+import {getUserRepository} from "../repositories";
+import {comparePassword, hashPassword} from "../utils/password-util";
+import {LoginRequest} from "../interfaces/login-request";
+import {addDate} from "../utils/date-util";
 
 const loginView = (req: Request, res: Response) => {
     const error = req.flash('login-error');

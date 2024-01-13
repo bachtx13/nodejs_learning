@@ -1,0 +1,8 @@
+extends ../layouts/main-layout
+
+block content
+    div(style={width: "80%"}).container
+        if error && error.alert && error.alert != ''
+            div(role="alert").alert.alert-danger #{error.alert}
+        div
+            p.text-success This is home page

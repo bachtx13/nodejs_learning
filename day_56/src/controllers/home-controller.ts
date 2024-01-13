@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
-import {getUserRepository} from "../../repositories";
-import {UserResponse} from "../../interfaces/user-response";
+import {getUserRepository} from "../repositories";
+import {UserResponse} from "../interfaces/user-response";
 
 const homeView = async (req: Request, res: Response) => {
     try {

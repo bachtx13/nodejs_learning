@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from "express";
-import {getUserRepository} from "../../repositories";
-import {IUserChangeStatus} from "../../interfaces/user-change-status";
+import {getUserRepository} from "../repositories";
+import {IUserChangeStatus} from "../interfaces/user-change-status";
 
 const userChangeStatus = async (req: Request<IUserChangeStatus>, res: Response, next: NextFunction) => {
     try {

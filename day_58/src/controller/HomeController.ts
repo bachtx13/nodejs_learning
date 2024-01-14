@@ -9,6 +9,7 @@ import {IUserResponse} from "../interfaces/response/user-response";
 export class HomeController {
     async homeView(request: Request, response: Response, next: NextFunction) {
         const userLogged = <IUserResponse>httpContext.get('user-logged')
+        console.log(userLogged)
         const userRepository = AppDataSource.getRepository(User)
         const users = await userRepository.findBy({
             role: UserRoleEnum.NORMAL_USER

@@ -6,7 +6,6 @@ import {UserService} from "../services/UserService";
 const publicRoutes = ["/auth/login", "/auth/register", "/", "/home"]
 const userService = new UserService()
 const middleware = async (request: Request, response: Response, next: NextFunction) => {
-
     try {
         const userLogged = await userService.getUserLogged(request, response)
         httpContext.set("user-logged", userLogged)

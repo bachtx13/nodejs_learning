@@ -9,7 +9,6 @@ import {IUserResponse} from "../interfaces/response/user-response";
 export class AdminController {
     async adminView(request: Request, response: Response, next: NextFunction) {
         const userLogged = <IUserResponse>httpContext.get('user-logged')
-        console.log(userLogged)
         const userRepository = AppDataSource.getRepository(User)
         const user = await userRepository.findOneBy({
             id: userLogged.id

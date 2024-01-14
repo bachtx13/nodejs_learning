@@ -167,7 +167,6 @@ export class UserController {
             const user = await userRepository.findOneBy({
                 id: userLogged.id
             })
-            console.log(user)
             if (!user) {
                 return response.render('user/change-password', {
                     title: "User Information",

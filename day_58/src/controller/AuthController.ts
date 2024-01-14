@@ -14,11 +14,18 @@ import {BlackList} from "../entity/BlackList";
 import httpContext from "express-http-context";
 import {ILogoutOtherDeviceRequest} from "../interfaces/request/logout-other-device-request";
 import {UserRoleEnum} from "../enum/user-role";
+import {IUserResponse} from "../interfaces/response/user-response";
 
 export class AuthController {
 
     async loginView(request: Request, response: Response, next: NextFunction) {
-
+        const userLogged = <IUserResponse>httpContext.get('user-logged')
+        if (userLogged) {
+            if (userLogged.role === UserRoleEnum.ADMIN) {
+                return response.redirect('/admin')
+            }
+            return response.redirect('/')
+        }
         const userLogging = <ILoginRequest>{
             email: "",
             password: ""
@@ -29,6 +36,7 @@ export class AuthController {
         }
         response.render('auth/login', {
             title: "Login",
+            userLogged: userLogged,
             user: userLogging,
             error: error
         })
@@ -94,6 +102,13 @@ export class AuthController {
     }
 
     async registerView(request: Request, response: Response, next: NextFunction) {
+        const userLogged = <IUserResponse>httpContext.get('user-logged')
+        if (userLogged) {
+            if (userLogged.role === UserRoleEnum.ADMIN) {
+                return response.redirect('/admin')
+            }
+            return response.redirect('/')
+        }
         const userRegistering = <IRegisterRequest>{
             email: "",
             password: "",
@@ -105,6 +120,7 @@ export class AuthController {
         }
         response.render('auth/register', {
             title: "Register",
+            userLogged: userLogged,
             user: userRegistering,
             error: error
         })

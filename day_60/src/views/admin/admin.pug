@@ -1,0 +1,23 @@
+extends ../layouts/main-layout
+
+block content
+    div(style={width: "80%"}).container
+        if error && error.alert && error.alert != ''
+            div(role="alert").alert.alert-danger #{error.alert}
+        table.table
+            thead
+                tr
+                    th(scope="col") #
+                    th(scope="col") Email
+                    th(scope="col") Status
+                    th(scope="col") Action
+            tbody
+                for user, index in users
+                    tr
+                        th(scope="row") #{index + 1}
+                        td #{user.email}
+                        td #{user.status === 0 ? "Inactive" : "Active"}
+                        td
+                            form(action="/user/change-status", method="POST")
+                                input(hidden=true, name="userId", value=user.id)
+                                button(type="submit").btn.btn-primary Change status

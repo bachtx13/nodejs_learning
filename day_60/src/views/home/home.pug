@@ -1,0 +1,10 @@
+extends ../layouts/main-layout
+
+block content
+    div(style={width: "80%"}).container
+        if error && error.alert && error.alert != ''
+            div(role="alert").alert.alert-danger #{error.alert}
+        div
+            if userLogged !== undefined && userLogged !== null
+                p.text-info Hello, #{userLogged.username}
+            p.text-success Is it different enough for you, dear?

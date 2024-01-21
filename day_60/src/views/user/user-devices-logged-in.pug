@@ -1,0 +1,34 @@
+extends ../layouts/user-manager-layout
+
+block main
+    div(style={width: "80%"}).container
+        if error && error.alert && error.alert != ''
+            div(role="alert").alert.alert-danger #{error.alert}
+        table.table
+            thead
+                tr
+                    th(scope="col") #
+                    th(scope="col") Platform
+                    th(scope="col") OS
+                    th(scope="col") Browser
+                    th(scope="col") Version
+                    th(scope="col") Last Visit
+                    th(scope="col") Status
+                    th(scope="col") Action
+            tbody
+                for loginInformation, index in loginInformationList
+                    tr
+                        th(scope="row") #{index + 1}
+                        td #{loginInformation.platform}
+                        td #{loginInformation.os}
+                        td #{loginInformation.browser}
+                        td #{loginInformation.version}
+                        td #{loginInformation.lastVisit}
+                        td #{loginInformation.isLogout ? "Logged out" : "Signing in"}
+                        td
+                            if !loginInformation.isLogout
+                                form(action="/auth/logout-other-device", method="POST")
+                                    input(hidden=true, name="deviceId", value=loginInformation.deviceId)
+                                    button(type="submit").btn.btn-danger Logout
+        form(action="/auth/logout-all-other-devices", method="POST")
+            button(type="submit").btn.btn-danger.w-40 Logout on all other devices

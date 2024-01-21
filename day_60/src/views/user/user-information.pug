@@ -1,0 +1,30 @@
+extends ../layouts/user-manager-layout
+
+block main
+    div(style={width: "60%"}).container
+        if error && error.alert && error.alert != ''
+            div(role="alert").alert.alert-danger #{error.alert}
+        form(action="/user/change-information", method="POST")
+            fieldset
+                legend: strong.text-info User Information
+                div.form-group.has-validation
+                    - var isInvalid = error && error.email
+                    label(for='email') Email
+                    input.form-control(id='email', readonly=true, name="email", type='email', placeholder='Email', value=userLogged.email, required, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        span.invalid-feedback #{error.email}
+                div.form-group.has-validation
+                    - var isInvalid = error && error.username
+                    label(for='username') Username
+                    input.form-control(id='username', name="username", type='text', placeholder='Username', value=userLogged.username, required, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        span.invalid-feedback #{error.username}
+                div.form-group.has-validation
+                    - var isInvalid = error && error.age
+                    label(for='age') Age
+                    input.form-control(id='age', name="age", type='number', placeholder='Age', value=userLogged.age, required, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        span.invalid-feedback #{error.age}
+                div.form-actions
+                    button.btn.btn-primary(type='submit') Submit form
+        a(href='/user/change-password') Change password

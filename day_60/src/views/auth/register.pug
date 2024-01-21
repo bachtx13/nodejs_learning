@@ -1,0 +1,30 @@
+extends ../layouts/main-layout
+
+block content
+    div(style={width: "60%"}).container
+        if error && error.alert && error.alert != ''
+            div(role="alert").alert.alert-danger #{error.alert}
+        form(action="/auth/register", method="POST")
+            fieldset
+                legend: strong.text-info Login page
+                div.form-group.has-validation
+                    - var isInvalid = error && error.email
+                    label(for='email') Email
+                    input.form-control(id='email', name="email", type='email', placeholder='Email', value=user.email, required, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        span.invalid-feedback #{error.email}
+                div.form-group.has-validation
+                    - var isInvalid = error && error.password
+                    label(for='password') Password
+                    input.form-control(id='password', name="password", type='password', placeholder='Password', value=user.password, required, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        span.invalid-feedback #{error.password}
+                div.form-group.has-validation
+                    - var isInvalid = error && error.passwordConfirmation
+                    label(for='passwordConfirmation') Password Confirmation
+                    input.form-control(id='passwordConfirmation', name="passwordConfirmation", type='password', placeholder='Password confirmation', value=user.passwordConfirmation, required, class={"is-invalid": isInvalid})
+                    if isInvalid
+                        span.invalid-feedback #{error.passwordConfirmation}
+                div.form-actions
+                    button.btn.btn-primary(type='submit') Submit form
+        a(href='/auth/login') Login
